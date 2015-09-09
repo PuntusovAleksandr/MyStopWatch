@@ -11,6 +11,9 @@ public class StartActivity extends AppCompatActivity {
 
     TextView textViewHead;
     Button btStart;
+    Button btStop;
+    TimerTask task;
+    boolean run = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,19 +22,28 @@ public class StartActivity extends AppCompatActivity {
 
         textViewHead = (TextView) findViewById(R.id.textView_head);
         btStart = (Button) findViewById(R.id.bt_start);
+        btStop = (Button) findViewById(R.id.bt_stop);
 
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimerTask task = new TimerTask();
+                task = new TimerTask();
                 task.execute();
+            }
+        });
+
+        btStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                run = false;
+                task = null;
             }
         });
     }
 
     class TimerTask extends AsyncTask {
 
-        boolean run = true;
+        ;
         long timeFromStart = 0;
 
         @Override
