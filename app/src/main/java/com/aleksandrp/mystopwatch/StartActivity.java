@@ -20,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
     private Button btPause;
     private TimerTask task;
     private boolean run;
+    private long startTime;
 
 
     @Override
@@ -36,6 +37,7 @@ public class StartActivity extends AppCompatActivity {
         btStart.setOnClickListener(listener);
         btPause.setOnClickListener(listener);
         btStop.setOnClickListener( listener);
+        btPause.setOnLongClickListener(longListener);
         btStop.setOnLongClickListener(longListener);
 
     }
@@ -45,7 +47,7 @@ public class StartActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            long startTime = System.currentTimeMillis();
+//             startTime = System.currentTimeMillis();
             while (run) {
                 try {
                     Thread.sleep(10);
@@ -68,7 +70,6 @@ public class StartActivity extends AppCompatActivity {
         String getFormattedTime() {
 
             long time = timeFromStart;
-
 
             long hours = time / MILLIS_IN_HOUR;
             time = time % MILLIS_IN_HOUR;
@@ -96,6 +97,7 @@ public class StartActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.bt_start:
                     zering();
+                    checking();
                     task = new TimerTask();
                     run = true;
                     task.execute();
@@ -111,13 +113,27 @@ public class StartActivity extends AppCompatActivity {
             }
         }
     };
+
     View.OnLongClickListener longListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            zering();
+            switch (v.getId()) {
+                case R.id.bt_stop:
+                    zering();
+                    break;
+                case R.id.bt_pause:
+                    textViewBody.setText(R.string.four_zero);
+                    break;
+            }
             return true;
         }
     };
+
+    private void checking() {
+        if (task == null) {
+            startTime = System.currentTimeMillis();
+        }
+    }
 
     private void zering() {
         run = false;
