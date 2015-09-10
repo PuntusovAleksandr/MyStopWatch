@@ -9,11 +9,18 @@ import android.widget.TextView;
 
 public class StartActivity extends AppCompatActivity {
 
-    TextView textViewHead;
-    Button btStart;
-    Button btStop;
-    TimerTask task;
-    boolean run = true;
+    static final long MILLIS_IN_HOUR = 3600000;
+    static final long MILLIS_IN_MINUTE = 60000;
+    static final long MILLIS_IN_SECOND = 1000;
+
+    private TextView textViewHead;
+    private TextView textViewBody;
+    private Button btStart;
+    private Button btStop;
+    private Button btPause;
+    private TimerTask task;
+    private boolean run;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,29 +28,19 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.start);
 
         textViewHead = (TextView) findViewById(R.id.textView_head);
+        textViewBody = (TextView) findViewById(R.id.textView_body);
         btStart = (Button) findViewById(R.id.bt_start);
         btStop = (Button) findViewById(R.id.bt_stop);
+        btPause = (Button) findViewById(R.id.bt_pause);
 
-        btStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                task = new TimerTask();
-                task.execute();
-            }
-        });
+        btStart.setOnClickListener(listener);
+        btPause.setOnClickListener(listener);
+        btStop.setOnClickListener( listener);
+        btStop.setOnLongClickListener(longListener);
 
-        btStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                run = false;
-                task = null;
-            }
-        });
     }
 
     class TimerTask extends AsyncTask {
-
-        ;
         long timeFromStart = 0;
 
         @Override
@@ -55,8 +52,8 @@ public class StartActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                    timeFromStart = System.currentTimeMillis() - startTime;
-                    publishProgress();
+                timeFromStart = System.currentTimeMillis() - startTime;
+                publishProgress();
             }
             return null;
         }
@@ -64,13 +61,9 @@ public class StartActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Object[] values) {
             super.onProgressUpdate(values);
-
             textViewHead.setText(getFormattedTime());
         }
 
-        static final long MILLIS_IN_HOUR = 3600000;
-        static final long MILLIS_IN_MINUTE = 60000;
-        static final long MILLIS_IN_SECOND = 1000;
 
         String getFormattedTime() {
 
@@ -92,9 +85,42 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.bt_start:
+                    zering();
+                    task = new TimerTask();
+                    run = true;
+                    task.execute();
+                    break;
+                case R.id.bt_stop:
+                    run = false;
+                    if (task != null)
+                    task = null;
+                    break;
+                case R.id.bt_pause:
+                    textViewBody.setText(textViewHead.getText().toString());
+                    break;
+            }
+        }
+    };
+    View.OnLongClickListener longListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            zering();
+            return true;
+        }
+    };
 
-
-
+    private void zering() {
+        run = false;
+        if (task != null)
+            task = null;
+        textViewBody.setText(R.string.four_zero);
+        textViewHead.setText(R.string.four_zero);
+    }
 
 
 //    @Override
