@@ -48,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
             long startTime = System.currentTimeMillis();
             while (run) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -69,6 +69,7 @@ public class StartActivity extends AppCompatActivity {
 
             long time = timeFromStart;
 
+
             long hours = time / MILLIS_IN_HOUR;
             time = time % MILLIS_IN_HOUR;
 
@@ -76,12 +77,16 @@ public class StartActivity extends AppCompatActivity {
             time = time % MILLIS_IN_MINUTE;
 
             long seconds = time / MILLIS_IN_SECOND;
+            time = time % MILLIS_IN_SECOND;
+
+            long milliseconds = time/10;
 
             String sHours = (hours == 0) ? "00" : (hours < 10) ? "0" + String.valueOf(hours) : String.valueOf(hours);
             String sMinutes = (minutes == 0) ? "00" : (minutes < 10) ? "0" + String.valueOf(minutes) : String.valueOf(minutes);
             String sSeconds = (seconds == 0) ? "00" : (seconds < 10) ? "0" + String.valueOf(seconds) : String.valueOf(seconds);
+            String mMilliseconds = (milliseconds == 0) ? "00" : (milliseconds < 10) ? "0" + String.valueOf(milliseconds) : String.valueOf(milliseconds);
 
-            return sHours + ":" + sMinutes + ":" + sSeconds;
+            return sHours + ":" + sMinutes + ":" + sSeconds + ":" + mMilliseconds;
         }
     }
 
