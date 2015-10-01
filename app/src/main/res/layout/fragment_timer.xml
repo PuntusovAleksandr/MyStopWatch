@@ -1,13 +1,115 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aleksandrp.mystopwatch.fragments.TimerFragment">
+    tools:context="com.aleksandrp.mystopwatch.fragments.TimerFragment"
+    android:orientation="vertical"
+    android:background="#010666">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_body"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.github.lzyzsd.circleprogress.DonutProgress
+            android:id="@+id/donut_progress"
+            android:layout_width="250sp"
+            android:layout_height="250sp"
+            custom:donut_background_color="#ffff00"
+            custom:donut_finished_color="#0000ff"
+            custom:donut_finished_stroke_width="10dp"
+            custom:donut_prefix_text=""
+
+            custom:donut_suffix_text=" s"
+            custom:donut_text_color="#000000"
+            custom:donut_text_size="24sp"
+            custom:donut_unfinished_color="#ff0000"
+            custom:donut_unfinished_stroke_width="10dp" />
+    </LinearLayout>
+
+    custom:donut_progress="100"
+
+    <LinearLayout
+        android:id="@+id/ll_botton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_weight="1.2"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/bt_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="#79fd05"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/bt_pause"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="#defe04"
+            android:text="@string/pausa" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_botton_floor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_stop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="#cd310d"
+            android:text="@string/stop" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_floor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.45"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_floor_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_myCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/aleksandrP"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#adfa06" />
+
+            <TextView
+                android:id="@+id/textView_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/year"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#adfa06" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
