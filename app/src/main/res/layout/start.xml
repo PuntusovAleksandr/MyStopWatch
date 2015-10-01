@@ -1,161 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".StartActivity"
-    android:orientation="vertical"
-    android:id="@+id/ll_main"
-    android:background="#010666">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ll_head"
-        android:layout_weight="1.3">
+        tools:context=".StartActivity">
 
-        <TextView
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textView_head"
-            android:textSize="58sp"
-            android:textColor="#ebfa00"
-            android:text="@string/four_zero"
-            android:layout_gravity="center"
-            android:gravity="center" />
+            android:layout_marginTop="112dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ll_body"
-        android:layout_weight="1.21"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-
-        <TextView
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/textView_body"
-            android:textSize="58sp"
-            android:textColor="#ebfa00"
-            android:text="@string/four_zero"
-            android:layout_gravity="center"
-            android:gravity="center" />
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:id="@+id/imageView_1decimal"-->
-            <!--android:src="@drawable/dec_0" />-->
+            android:layout_height="wrap_content">
 
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:src="@drawable/dec_0"-->
-            <!--android:id="@+id/imageView_2decimal" />-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
 
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1.1"-->
-            <!--android:src="@drawable/dec_two_point"-->
-            <!--android:id="@+id/imageView_two_point" />-->
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:tabIndicatorColor="@color/Chartreuse"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/Blue" />
 
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:src="@drawable/dec_0"-->
-            <!--android:id="@+id/imageView_3decimal" />-->
+        </android.support.design.widget.AppBarLayout>
 
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:src="@drawable/dec_0"-->
-            <!--android:id="@+id/imageView_4decimal" />-->
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ll_botton"
-        android:layout_weight="1.2" >
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/start"
-            android:id="@+id/bt_start"
-            android:layout_weight="1"
-            android:background="#79fd05"
-            android:layout_margin="5dp" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/pausa"
-            android:id="@+id/bt_pause"
-            android:layout_weight="1"
-            android:background="#defe04"
-            android:layout_margin="5dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2"
-        android:id="@+id/ll_botton_floor">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/stop"
-            android:id="@+id/bt_stop"
-            android:background="#cd310d"
-            android:layout_margin="5dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ll_floor"
-        android:layout_weight="1.45"
-        android:gravity="center_horizontal">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ll_floor_vertical"
-            android:gravity="center_vertical|center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/aleksandrP"
-                android:id="@+id/textView_myCompany"
-                android:textColor="#adfa06"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/year"
-                android:id="@+id/textView_year"
-                android:singleLine="true"
-                android:textColor="#adfa06" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</FrameLayout>

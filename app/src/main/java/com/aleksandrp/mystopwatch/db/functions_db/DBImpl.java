@@ -31,11 +31,13 @@ public class DBImpl {
     }
 
     public void openDb() {
-        dbHelper = new MyDBHelper(context);
-        database = dbHelper.getWritableDatabase();
-        Log.i(ValuesDB.TAG_DB, "Open method openDb - \n dbHelper::: "
-                + dbHelper.toString() + "\ndatabase::: "
-                + database.toString());
+        if (dbHelper == null) {
+            dbHelper = new MyDBHelper(context);
+            database = dbHelper.getWritableDatabase();
+            Log.i(ValuesDB.TAG_DB, "Open method openDb - \n dbHelper::: "
+                    + dbHelper.toString() + "\ndatabase::: "
+                    + database.toString());
+        }
     }
 
     public void close() {
@@ -44,12 +46,14 @@ public class DBImpl {
     }
 
     public void putNewTime(TimeFix timeFix) {
+        openDb();
         Log.i(ValuesDB.TAG_DB, "putNewTime where timeFix = " + timeFix.toString());
         contentValues = new ContentValues();
         contentValues.put(ValuesDB.COLUMN_TITLE, timeFix.getTitle());
         contentValues.put(ValuesDB.COLUMN_DATE, timeFix.getDate());
         contentValues.put(ValuesDB.COLUMN_TIME_DATA, timeFix.getTimeLong());
         database.insert(ValuesDB.NAME_TABLE_TABLE_TIME, null, contentValues);
+        close();
     }
 
     public ArrayList<TimeFix> getAllTimeById() {
@@ -74,6 +78,7 @@ public class DBImpl {
 
     @NonNull
     private ArrayList<TimeFix> getAllTimeFixes(String orderBy) {
+        openDb();
         ArrayList<TimeFix> timeFixes = new ArrayList<>();
         try {
             cursor = database.query(ValuesDB.NAME_TABLE_TABLE_TIME,
@@ -89,23 +94,30 @@ public class DBImpl {
         } catch (SQLiteException e) {
             Log.e(ValuesDB.TAG_DB, e.getStackTrace().toString());
         }
+        close();
         return timeFixes;
     }
 
     public void removeAllTime() {
+        openDb();
         Log.i(ValuesDB.TAG_DB, "removeAllTime all ");
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME, null, null);
+        close();
     }
 
     public void removeByTime(long time) {
+        openDb();
         Log.i(ValuesDB.TAG_DB, "removeByTime where time = " + time);
                 database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                         ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
+        close();
     }
 
     public void removeByDate(long time) {
+        openDb();
         Log.i(ValuesDB.TAG_DB, "removeByDate where time = " + time);
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                 ValuesDB.COLUMN_DATE + " = " + time, null);
+        close();
     }
 }
