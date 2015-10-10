@@ -1,6 +1,7 @@
 package com.aleksandrp.mystopwatch.main;
 
 import android.app.FragmentManager;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -29,6 +30,8 @@ public class StartActivity extends AppCompatActivity implements Values {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         db = new DBImpl(getApplicationContext());
         db.openDb();
