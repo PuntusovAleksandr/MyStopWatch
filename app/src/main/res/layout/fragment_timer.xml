@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aleksandrp.mystopwatch.fragments.TimerFragment"
+    tools:context="com.aleksandrp.superstopwatch.fragments.TimerFragment"
     android:orientation="vertical"
     android:background="#010666">
 

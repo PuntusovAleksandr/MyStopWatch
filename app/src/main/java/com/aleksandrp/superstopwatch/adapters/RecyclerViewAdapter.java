@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.adapters;
+package com.aleksandrp.superstopwatch.adapters;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
-import com.aleksandrp.mystopwatch.entity.Time;
+import com.aleksandrp.superstopwatch.entity.Time;
 
 import java.util.List;
 

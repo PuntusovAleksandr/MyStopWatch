@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.db.functions_db;
+package com.aleksandrp.superstopwatch.db.functions_db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteException;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.aleksandrp.mystopwatch.db.DBHelper.MyDBHelper;
-import com.aleksandrp.mystopwatch.db.constants.ValuesDB;
-import com.aleksandrp.mystopwatch.db.entity.TimeFix;
+import com.aleksandrp.superstopwatch.db.DBHelper.MyDBHelper;
+import com.aleksandrp.superstopwatch.db.constants.ValuesDB;
+import com.aleksandrp.superstopwatch.db.entity.TimeFix;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.values;
+package com.aleksandrp.superstopwatch.values;
 
 /**
  * Created by Aleksandr on 25.09.2015.

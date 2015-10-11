@@ -1,11 +1,11 @@
-package com.aleksandrp.mystopwatch.db.DBHelper;
+package com.aleksandrp.superstopwatch.db.DBHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.aleksandrp.mystopwatch.db.constants.ValuesDB;
+import com.aleksandrp.superstopwatch.db.constants.ValuesDB;
 
 /**
  * Created by Aleksandr on 25.09.2015.

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyStopWatch</string>
+    <string name="app_name">SuperStopwatch</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -15,4 +15,6 @@
     <string name="title_stopwatch">Stopwatch</string>
     <string name="title_timer">Timer</string>
     <string name="title_history">History</string>
+
+    <string name="bunner_id">ca-app-pub-9157342453961961/9124068538</string>
 </resources>

@@ -1,12 +1,12 @@
-package com.aleksandrp.mystopwatch.adapters;
+package com.aleksandrp.superstopwatch.adapters;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
-import com.aleksandrp.mystopwatch.fragments.HistoryFragment;
-import com.aleksandrp.mystopwatch.fragments.StopwatchFragment;
-import com.aleksandrp.mystopwatch.fragments.TimerFragment;
+import com.aleksandrp.superstopwatch.fragments.HistoryFragment;
+import com.aleksandrp.superstopwatch.fragments.StopwatchFragment;
+import com.aleksandrp.superstopwatch.fragments.TimerFragment;
 
 /**
  * Created by Aleksandr on 29.09.2015.

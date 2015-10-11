@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.fragments;
+package com.aleksandrp.superstopwatch.fragments;
 
 
 import android.app.Fragment;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aleksandrp.mystopwatch.R;
-import com.aleksandrp.mystopwatch.adapters.RecyclerViewAdapter;
-import com.aleksandrp.mystopwatch.entity.Time;
+import com.aleksandrp.superstopwatch.adapters.RecyclerViewAdapter;
+import com.aleksandrp.superstopwatch.entity.Time;
 
 import java.util.ArrayList;
 import java.util.List;

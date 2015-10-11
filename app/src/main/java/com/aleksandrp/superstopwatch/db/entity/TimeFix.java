@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.db.entity;
+package com.aleksandrp.superstopwatch.db.entity;
 
 import java.util.Date;
 

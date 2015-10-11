@@ -1,43 +1,58 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".StartActivity">
+        android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="112dp" />
+            tools:context=".StartActivity">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar_layout"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="112dp" />
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize" />
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:tabIndicatorColor="@color/Chartreuse"
+                    app:tabSelectedTextColor="@color/colorAccent"
+                    app:tabTextColor="@color/Blue" />
+
+            </android.support.design.widget.AppBarLayout>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+        '
+        <com.google.android.gms.ads.AdView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:tabIndicatorColor="@color/Chartreuse"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/Blue" />
-
-        </android.support.design.widget.AppBarLayout>
-
-
-    </android.support.design.widget.CoordinatorLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/reclam_baner"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/bunner_id">
+        </com.google.android.gms.ads.AdView>
+    </RelativeLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.db.constants;
+package com.aleksandrp.superstopwatch.db.constants;
 
 /**
  * Created by Aleksandr on 25.09.2015.

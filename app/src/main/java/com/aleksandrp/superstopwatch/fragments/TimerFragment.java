@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.fragments;
+package com.aleksandrp.superstopwatch.fragments;
 
 
 import android.app.Fragment;

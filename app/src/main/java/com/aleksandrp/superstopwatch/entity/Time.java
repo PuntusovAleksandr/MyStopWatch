@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.entity;
+package com.aleksandrp.superstopwatch.entity;
 
 /**
  * Created by Aleksandr on 08.10.2015.

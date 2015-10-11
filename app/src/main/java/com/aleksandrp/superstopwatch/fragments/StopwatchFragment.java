@@ -1,4 +1,4 @@
-package com.aleksandrp.mystopwatch.fragments;
+package com.aleksandrp.superstopwatch.fragments;
 
 
 import android.app.Fragment;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
-import com.aleksandrp.mystopwatch.values.Values;
+import com.aleksandrp.superstopwatch.values.Values;
 
 import java.util.concurrent.TimeUnit;
 
