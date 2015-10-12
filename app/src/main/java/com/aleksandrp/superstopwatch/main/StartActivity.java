@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.adapters.AdapterStopwatch;
-import com.aleksandrp.superstopwatch.baner.Ads;
 import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
 import com.aleksandrp.superstopwatch.fragments.HistoryFragment;
 import com.aleksandrp.superstopwatch.fragments.StopwatchFragment;
@@ -32,7 +31,7 @@ public class StartActivity extends AppCompatActivity implements Values {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
 
-        Ads.showBanner(this);
+       //  Ads.showBanner(this);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

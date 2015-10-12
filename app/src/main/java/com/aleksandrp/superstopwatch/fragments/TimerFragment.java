@@ -56,25 +56,35 @@ public class TimerFragment extends Fragment {
         task = new TimerTask();
     }
 
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.bt_timer_start:
-                        countValue=1000;
-                        if (countValue > 0) {
-                            donutProgress.setMax(countValue);
-                        }
-                        run = true;
-                        task.execute();
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.bt_timer_start:
+                    zering();
+                    task = new TimerTask();
+                    run = true;
+                    task.execute();
 
-                    case R.id.bt_timer_stop:
-                        run = false;
-                        if (task != null)
-                            task = null;
-                }
+                case R.id.bt_timer_stop:
+                    run = false;
+                    taskTimerZero();
             }
-        };
+        }
+    };
+
+    private void taskTimerZero() {
+        if (task != null)
+            task = null;
+    }
+
+    private void zering() {
+
+        run = false;
+        taskTimerZero();
+        countValue = 1000;
+        donutProgress.setMax(countValue);
+    }
 
     class TimerTask extends AsyncTask {
         int res = 0;
@@ -82,7 +92,7 @@ public class TimerFragment extends Fragment {
         @Override
         protected Object doInBackground(Object[] params) {
 //             startTime = System.currentTimeMillis();
-            while (res<countValue) {
+            while (res < countValue) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(10);
                 } catch (InterruptedException e) {
