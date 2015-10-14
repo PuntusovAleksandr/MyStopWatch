@@ -9,18 +9,18 @@ public class TimeFix {
 
     private long id;
     private String title;
-    private long date;
+    private Long date;
     private long timeLong;
 
     public TimeFix(long timeLong) {
-        this.date = new Date().getTime();
+        this.date = new Date(System.currentTimeMillis()).getTime();
         this.timeLong = timeLong;
     }
 
     public TimeFix(String title, long timeLong) {
         this.title = title;
         this.timeLong = timeLong;
-        this.date = new Date().getTime();
+        this.date = new Date(System.currentTimeMillis()).getTime();
     }
 
     public TimeFix(long id, String title, long date, long timeLong) {

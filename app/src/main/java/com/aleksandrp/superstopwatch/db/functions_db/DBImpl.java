@@ -52,7 +52,11 @@ public class DBImpl {
         contentValues.put(ValuesDB.COLUMN_TITLE, timeFix.getTitle());
         contentValues.put(ValuesDB.COLUMN_DATE, timeFix.getDate());
         contentValues.put(ValuesDB.COLUMN_TIME_DATA, timeFix.getTimeLong());
-        database.insert(ValuesDB.NAME_TABLE_TABLE_TIME, null, contentValues);
+        try {
+            database.insert(ValuesDB.NAME_TABLE_TABLE_TIME, null, contentValues);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         close();
     }
 
@@ -82,13 +86,15 @@ public class DBImpl {
         ArrayList<TimeFix> timeFixes = new ArrayList<>();
         try {
             cursor = database.query(ValuesDB.NAME_TABLE_TABLE_TIME,
-                    null, null, null, null, null, orderBy);
+                    null, null, null, null, null, orderBy+" DESC");
             if (cursor.moveToFirst()) {
-                long id = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_ID));
-                String title = cursor.getString(cursor.getColumnIndex(ValuesDB.COLUMN_TITLE));
-                long date = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_DATE));
-                long timeLong = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_TIME_DATA));
-                timeFixes.add(new TimeFix(id, title, date, timeLong));
+                do {
+                    long id = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_ID));
+                    String title = cursor.getString(cursor.getColumnIndex(ValuesDB.COLUMN_TITLE));
+                    long date = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_DATE));
+                    long timeLong = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_TIME_DATA));
+                    timeFixes.add(new TimeFix(id, title, date, timeLong));
+                } while (cursor.moveToNext());
             }
             cursor.close();
         } catch (SQLiteException e) {

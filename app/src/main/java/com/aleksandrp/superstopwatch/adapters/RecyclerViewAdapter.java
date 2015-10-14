@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
-import com.aleksandrp.superstopwatch.entity.Time;
+import com.aleksandrp.superstopwatch.db.entity.TimeFix;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -18,23 +19,26 @@ import java.util.List;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.TimeViewHolder> {
 
-    private List<Time> times;
+    private List<TimeFix> times;
 
-    public RecyclerViewAdapter(List<Time> times) {
+    public RecyclerViewAdapter(List<TimeFix> times) {
         this.times = times;
     }
 
     public class TimeViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView timeTitle;
-        TextView timeValue;
+
+        TextView tv_timeTitle;
+        TextView tv_timeDate;
+        TextView tv_timeLong;
         ImageView timeIcon;
 
         TimeViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.card_view);
-            timeTitle = (TextView) itemView.findViewById(R.id.time_title);
-            timeValue = (TextView) itemView.findViewById(R.id.time_value);
+            cardView = (CardView) itemView.findViewById(R.id.cv);
+            tv_timeTitle = (TextView) itemView.findViewById(R.id.time_title);
+            tv_timeDate = (TextView) itemView.findViewById(R.id.time_date);
+            tv_timeLong = (TextView) itemView.findViewById(R.id.time_value);
             timeIcon = (ImageView) itemView.findViewById(R.id.time_photo);
         }
     }
@@ -42,15 +46,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public TimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        TimeViewHolder timeViewHolder = new TimeViewHolder(view);
-        return timeViewHolder;
+        return new TimeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TimeViewHolder holder, int position) {
-        holder.timeTitle.setText(times.get(position).getTitle());
-        holder.timeValue.setText(times.get(position).getValue());
-        holder.timeIcon.setImageResource(times.get(position).getIconId());
+        String timeDate = new SimpleDateFormat("dd.mm.yyyy HH:mm:ss").format(times.get(position).getDate())+"";
+        String timeLong = new SimpleDateFormat("hh:mm:ss").format(times.get(position).getTimeLong())+"";
+        holder.tv_timeTitle.setText(times.get(position).getTitle());
+        holder.tv_timeDate.setText(timeDate);
+        holder.tv_timeLong.setText(timeLong);
+        holder.timeIcon.setImageResource(R.drawable.ic_launcher);
     }
 
     @Override

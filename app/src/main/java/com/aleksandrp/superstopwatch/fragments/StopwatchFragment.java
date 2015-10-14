@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
+import com.aleksandrp.superstopwatch.db.entity.TimeFix;
+import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
 import com.aleksandrp.superstopwatch.values.Values;
 
 import java.util.concurrent.TimeUnit;
@@ -32,6 +34,8 @@ public class StopwatchFragment extends Fragment implements Values {
 
     private View stopwatchView;
 
+    private DBImpl db;
+
 
     public StopwatchFragment() {
         // Required empty public constructor
@@ -42,6 +46,9 @@ public class StopwatchFragment extends Fragment implements Values {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         stopwatchView = inflater.inflate(R.layout.fragment_stopwatch, container, false);
+
+        db = new DBImpl(getActivity().getApplicationContext());
+
         init();
 
         return stopwatchView;
@@ -122,13 +129,13 @@ public class StopwatchFragment extends Fragment implements Values {
                     task.execute();
                     break;
                 case R.id.bt_stop:
-//                    db.putNewTime(new TimeFix(timeLong));
+//                    db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
                     run = false;
                     if (task != null)
                         task = null;
                     break;
                 case R.id.bt_pause:
-//                    db.putNewTime(new TimeFix(timeLong));
+                    db.putNewTime(new TimeFix("Paused stopwatsh" ,timeLong));
                     textViewBody.setText(textViewHead.getText().toString());
                     break;
             }
@@ -140,11 +147,12 @@ public class StopwatchFragment extends Fragment implements Values {
         public boolean onLongClick(View v) {
             switch (v.getId()) {
                 case R.id.bt_stop:
-//                    db.putNewTime(new TimeFix(timeLong));
+                    db.putNewTime(new TimeFix("Stop stopwatch" + " and clear", timeLong));
                     zering();
                     break;
                 case R.id.bt_pause:
                     textViewBody.setText(R.string.four_zero);
+                    db.putNewTime(new TimeFix("Paused stopwatch" + " and zering", timeLong));
                     break;
             }
             return true;

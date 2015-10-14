@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.adapters.RecyclerViewAdapter;
-import com.aleksandrp.superstopwatch.entity.Time;
+import com.aleksandrp.superstopwatch.db.entity.TimeFix;
+import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +22,10 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
 
-    private List<Time> times;
+    private List<TimeFix> times;
 
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private DBImpl db;
 
     public HistoryFragment() {
     }
@@ -34,6 +33,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db = new DBImpl(getActivity().getApplicationContext());
 
         View view = inflater.inflate(R.layout.recycler_view, container, false);
         initializedRecyclerView(view);
@@ -44,25 +44,18 @@ public class HistoryFragment extends Fragment {
 
     private void initializedRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
     }
 
     private void initializeAdapter() {
-        recyclerViewAdapter = new RecyclerViewAdapter(times);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(times);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     private void initialized() {
-        times = new ArrayList<>();
-        times.add(new Time("first", "123", R.drawable.dec_0));
-        times.add(new Time("second", "1243", R.drawable.dec_1));
-        times.add(new Time("three", "1233", R.drawable.dec_2));
-        times.add(new Time("four", "1253", R.drawable.dec_3));
-        times.add(new Time("fife", "1823", R.drawable.dec_4));
-        times.add(new Time("six", "12513", R.drawable.dec_5));
-        times.add(new Time("seven", "12563", R.drawable.dec_6));
+        times = db.getAllTimeByDate();
     }
 
 
