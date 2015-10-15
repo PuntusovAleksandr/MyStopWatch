@@ -122,17 +122,22 @@ public class StopwatchFragment extends Fragment implements Values {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.bt_start:
+                    String tmp = textViewHead.getText().toString();
                     zering();
                     checking();
                     task = new TimerTask();
                     run = true;
                     task.execute();
+                    if (timeLong>0)
+                        db.putNewTime(new TimeFix("Start new stopwatch", timeLong));
+                    textViewBody.setText(tmp);
                     break;
                 case R.id.bt_stop:
-//                    db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
                     run = false;
-                    if (task != null)
+                    if (task != null) {
                         task = null;
+                    }
+                    db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
                     break;
                 case R.id.bt_pause:
                     db.putNewTime(new TimeFix("Paused stopwatsh" ,timeLong));

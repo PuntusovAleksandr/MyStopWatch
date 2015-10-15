@@ -50,7 +50,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initializeAdapter() {
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(times);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(times, getActivity().getApplicationContext());
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
