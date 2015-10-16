@@ -1,6 +1,7 @@
 package com.aleksandrp.superstopwatch.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,6 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.cardView.setOnClickListener(listener);
         holder.cardView.setOnLongClickListener(longListener);
+        holder.cardView.setCardBackgroundColor(Color.parseColor("#88888888"));
 
     }
 
