@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.aleksandrp.superstopwatch.fragments.TimerFragment"
     android:orientation="vertical"
-    android:background="#010666">
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/ll_body"
