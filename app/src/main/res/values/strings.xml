@@ -13,11 +13,12 @@
     <string name="stop">Stop</string>
     <string name="four_zero">00:00:00:00</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_stopwatch">Stopwatch</string>
     <string name="title_timer">Timer</string>
     <string name="title_history">History</string>
 
     <string name="bunner_id">ca-app-pub-9157342453961961/9124068538</string>
+    <string name="clock">Clock</string>
 </resources>

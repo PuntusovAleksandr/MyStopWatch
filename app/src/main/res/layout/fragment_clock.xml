@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    android:background="@color/BlackTrancp"
+    tools:context="com.aleksandrp.superstopwatch.fragments.ClockFragmen"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/coordinatir"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/circleView_sec"
+            android:layout_width="255dp"
+            android:layout_height="255dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            CircleProgressView:cpv_autoTextSize="false"
+            CircleProgressView:cpv_barColor="#FF0000"
+            CircleProgressView:cpv_barWidth="13dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_maxValue="60"
+            CircleProgressView:cpv_rimColor="#00000000"
+            CircleProgressView:cpv_rimWidth="4dp"
+            CircleProgressView:cpv_seekMode="false"
+            CircleProgressView:cpv_textColor="#00796B"
+            CircleProgressView:cpv_unit=""
+            CircleProgressView:cpv_unitColor="#009688" />
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/circleView_min"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            CircleProgressView:cpv_autoTextSize="false"
+            CircleProgressView:cpv_barColor="#00FF00"
+            CircleProgressView:cpv_barWidth="15dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_maxValue="60"
+            CircleProgressView:cpv_rimColor="#00000000"
+            CircleProgressView:cpv_rimWidth="15dp"
+            CircleProgressView:cpv_seekMode="false"
+            CircleProgressView:cpv_textColor="#00796B"
+            CircleProgressView:cpv_unit=""
+            CircleProgressView:cpv_unitColor="#009688" />
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/circleView_hours"
+            android:layout_width="195dp"
+            android:layout_height="195dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            CircleProgressView:cpv_autoTextSize="false"
+            CircleProgressView:cpv_barColor="#380aee"
+            CircleProgressView:cpv_barWidth="25dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_maxValue="24"
+            CircleProgressView:cpv_rimColor="#00000000"
+            CircleProgressView:cpv_rimWidth="35dp"
+            CircleProgressView:cpv_seekMode="false"
+            CircleProgressView:cpv_textColor="#00796B"
+            CircleProgressView:cpv_unit=""
+            CircleProgressView:cpv_unitColor="#009688" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/White"
+            android:textSize="48sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

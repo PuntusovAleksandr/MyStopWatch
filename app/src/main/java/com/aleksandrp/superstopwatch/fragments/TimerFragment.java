@@ -53,7 +53,6 @@ public class TimerFragment extends Fragment {
         btStartTimer.setOnClickListener(listener);
         btPauseTimer.setOnClickListener(listener);
         btStopTimer.setOnClickListener(listener);
-        task = new TimerTask();
     }
 
     View.OnClickListener listener = new View.OnClickListener() {

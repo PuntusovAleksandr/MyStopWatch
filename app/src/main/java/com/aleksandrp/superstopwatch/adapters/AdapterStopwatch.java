@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
+import com.aleksandrp.superstopwatch.fragments.ClockFragmen;
 import com.aleksandrp.superstopwatch.fragments.HistoryFragment;
 import com.aleksandrp.superstopwatch.fragments.StopwatchFragment;
 import com.aleksandrp.superstopwatch.fragments.TimerFragment;
@@ -25,10 +26,12 @@ public class AdapterStopwatch extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return new StopwatchFragment();
+                return new ClockFragmen();
             case 1:
-                return new TimerFragment();
+                return new StopwatchFragment();
             case 2:
+                return new TimerFragment();
+            case 3:
                 return new HistoryFragment();
             default:
                 return null;

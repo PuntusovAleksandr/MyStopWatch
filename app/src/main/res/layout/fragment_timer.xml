@@ -28,7 +28,7 @@
             custom:donut_finished_stroke_width="20dp"
             custom:donut_prefix_text=""
 
-            custom:donut_suffix_text=" s"
+            custom:donut_suffix_text=""
             custom:donut_text_color="#79fd05"
             custom:donut_text_size="32sp"
             custom:donut_unfinished_color="#ff0000"

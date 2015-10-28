@@ -10,10 +10,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.adapters.AdapterStopwatch;
+import com.aleksandrp.superstopwatch.baner.Ads;
 import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
-import com.aleksandrp.superstopwatch.fragments.HistoryFragment;
-import com.aleksandrp.superstopwatch.fragments.StopwatchFragment;
-import com.aleksandrp.superstopwatch.fragments.TimerFragment;
 import com.aleksandrp.superstopwatch.values.Values;
 
 public class StartActivity extends AppCompatActivity implements Values {
@@ -21,9 +19,6 @@ public class StartActivity extends AppCompatActivity implements Values {
     private DBImpl db;
 
     private FragmentManager fragmentManager;
-    private StopwatchFragment stopwatchFragment;
-    private TimerFragment timerFragment;
-    private HistoryFragment historyFragment;
 
 
     @Override
@@ -31,7 +26,7 @@ public class StartActivity extends AppCompatActivity implements Values {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
 
-       //  Ads.showBanner(this);
+         Ads.showBanner(this);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -51,6 +46,9 @@ public class StartActivity extends AppCompatActivity implements Values {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab()
+                .setText(R.string.clock)
+                .setIcon(R.drawable.icon_bg));
+        tabLayout.addTab(tabLayout.newTab()
                 .setText(R.string.title_stopwatch)
                 .setIcon(R.drawable.ic_timelapse_white_24dp));
         tabLayout.addTab(tabLayout.newTab()
@@ -61,7 +59,7 @@ public class StartActivity extends AppCompatActivity implements Values {
                 .setIcon(R.drawable.ic_restore_white_24dp));
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        AdapterStopwatch adapterStopwatch = new AdapterStopwatch(fragmentManager, 3);
+        AdapterStopwatch adapterStopwatch = new AdapterStopwatch(fragmentManager, 4);
 
         viewPager.setAdapter(adapterStopwatch);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
