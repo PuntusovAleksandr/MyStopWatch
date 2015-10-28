@@ -57,7 +57,7 @@ public class DBImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        close();
+//        close();
     }
 
     public ArrayList<TimeFix> getAllTimeById() {
@@ -82,8 +82,8 @@ public class DBImpl {
 
     @NonNull
     private ArrayList<TimeFix> getAllTimeFixes(String orderBy) {
-        openDb();
         ArrayList<TimeFix> timeFixes = new ArrayList<>();
+        openDb();
         try {
             cursor = database.query(ValuesDB.NAME_TABLE_TABLE_TIME,
                     null, null, null, null, null, orderBy+" DESC");
@@ -100,7 +100,7 @@ public class DBImpl {
         } catch (SQLiteException e) {
             Log.e(ValuesDB.TAG_DB, e.getStackTrace().toString());
         }
-        close();
+//        close();
         return timeFixes;
     }
 
@@ -108,7 +108,7 @@ public class DBImpl {
         openDb();
         Log.i(ValuesDB.TAG_DB, "removeAllTime all ");
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME, null, null);
-        close();
+//        close();
     }
 
     public void removeByTime(long time) {
@@ -116,7 +116,7 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "removeByTime where time = " + time);
                 database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                         ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
-        close();
+//        close();
     }
 
     public void removeByDate(long time) {
@@ -124,6 +124,6 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "removeByDate where time = " + time);
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                 ValuesDB.COLUMN_DATE + " = " + time, null);
-        close();
+//        close();
     }
 }

@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.adapters.RecyclerViewAdapter;
@@ -28,6 +28,13 @@ public class HistoryFragment extends Fragment {
     private List<TimeFix> times;
 
     private DBImpl db;
+
+    private RecyclerViewAdapter recyclerViewAdapter;
+
+    private final String ALL = "All";
+    private final String NAME = "Name";
+    private final String DATE = "Date";
+    private final String TIME = "Time";
 
     public HistoryFragment() {
     }
@@ -50,39 +57,34 @@ public class HistoryFragment extends Fragment {
     private void initTab(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_history);
         tabLayout.addTab(tabLayout.newTab()
-                .setText("All"));
-//                .setIcon(R.drawable.icon_bg));
+                .setText(ALL));
         tabLayout.addTab(tabLayout.newTab()
-                .setText("Name"));
-//                .setIcon(R.drawable.icon_bg));
+                .setText(NAME));
         tabLayout.addTab(tabLayout.newTab()
-                .setText("Date"));
-//                .setIcon(R.drawable.ic_timelapse_white_24dp));
+                .setText(DATE));
         tabLayout.addTab(tabLayout.newTab()
-                .setText("Time"));
-//                .setIcon(R.drawable.ic_av_timer_white_24dp));
-
-//        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//        AdapterStopwatch adapterStopwatch = new AdapterStopwatch(fragmentManager, 4);
-//
-//        viewPager.setAdapter(adapterStopwatch);
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+                .setText(TIME));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-                Toast.makeText(getActivity(), tab.getText()+"", Toast.LENGTH_SHORT).show();
+                Log.i("myLog", tab.getText() + "");
+                if (db == null) {
+                    db = new DBImpl(getActivity().getApplicationContext());
+                }
+                if (tab.getText().equals(ALL)) times = db.getAllTimeById();
+                if (tab.getText().equals(NAME)) times = db.getAllTimeByTitle();
+                if (tab.getText().equals(DATE)) times = db.getAllTimeByDate();
+                if (tab.getText().equals(TIME)) times = db.getAllTimeByTime();
+                initializeAdapter();
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }
@@ -95,13 +97,12 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initializeAdapter() {
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(times, getActivity().getApplicationContext());
+        recyclerViewAdapter = null;
+        recyclerViewAdapter = new RecyclerViewAdapter(times, getActivity().getApplicationContext());
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     private void initialized() {
         times = db.getAllTimeByDate();
     }
-
-
 }

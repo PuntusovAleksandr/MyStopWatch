@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:scrollbarSize="@dimen/item_touch_helper_max_drag_scroll_per_frame"
-        android:background="@color/BlackTrancp"
+        android:background="@color/BlackDarkTrancp"
         app:tabIndicatorColor="@color/Chartreuse"
-        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/Yellow"
         app:tabTextColor="@color/Blue" />
 
 

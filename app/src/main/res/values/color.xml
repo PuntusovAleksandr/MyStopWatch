@@ -150,6 +150,7 @@
 
 
     <color name="BlackTrancp">#70000000</color>
+    <color name="BlackDarkTrancp">#95000000</color>
 
 
 </resources>
