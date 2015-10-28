@@ -1,5 +1,26 @@
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recycler_view"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent" />
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_history"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:scrollbarSize="@dimen/item_touch_helper_max_drag_scroll_per_frame"
+        android:background="@color/BlackTrancp"
+        app:tabIndicatorColor="@color/Chartreuse"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/Blue" />
+
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>
