@@ -98,7 +98,7 @@ public class HistoryFragment extends Fragment {
 
     private void initializeAdapter() {
         recyclerViewAdapter = null;
-        recyclerViewAdapter = new RecyclerViewAdapter(times, getActivity().getApplicationContext());
+        recyclerViewAdapter = new RecyclerViewAdapter(times, getActivity());
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 

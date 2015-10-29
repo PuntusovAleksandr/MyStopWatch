@@ -21,4 +21,10 @@
 
     <string name="bunner_id">ca-app-pub-9157342453961961/9124068538</string>
     <string name="clock">Clock</string>
+    <string name="positive">Ok</string>
+    <string name="negative">Cancel</string>
+    <string name="delete_item">Are you realy want to delete this item</string>
+    <string name="delete_item_from_list">Are you realy want to delete this item ?</string>
+    <string name="delete_all_items_from_list">Are you realy want to delete all items ?</string>
+    <string name="all_times_deleted">All times deleted!</string>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.db.entity.TimeFix;
 import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
+import com.aleksandrp.superstopwatch.dialog.CastomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -27,6 +28,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private DBImpl db;
 
     private Context context;
+
+    private String textDialog;
+
 
     public RecyclerViewAdapter(List<TimeFix> times, Context context) {
         this.times = times;
@@ -60,8 +64,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(TimeViewHolder holder, int position) {
-        String timeDate = new SimpleDateFormat("dd.mm.yyyy HH:mm:ss:").format(times.get(position).getDate())+"";
-        String timeLong = new SimpleDateFormat("hh:mm:ss:SSS").format(times.get(position).getTimeLong())+"";
+        String timeDate = new SimpleDateFormat("dd.mm.yyyy HH:mm:ss:").format(times.get(position).getDate()) + "";
+        String timeLong = new SimpleDateFormat("hh:mm:ss:SSS").format(times.get(position).getTimeLong()) + "";
         holder.tv_timeTitle.setText(times.get(position).getTitle());
         holder.tv_timeDate.setText(timeDate);
         holder.tv_timeLong.setText(timeLong);
@@ -85,15 +89,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-
+        public void onClick(View view) {
+            new CastomDialog(context, view,
+                    context.getResources().getString(
+                            R.string.delete_item_from_list)).show();
         }
     };
 
     View.OnLongClickListener longListener = new View.OnLongClickListener() {
         @Override
-        public boolean onLongClick(View v) {
-            db.removeAllTime();
+        public boolean onLongClick(View view) {
+            new CastomDialog(context, null,
+                    context.getResources().getString(
+                            R.string.delete_all_items_from_list)).show();
             return true;
         }
     };

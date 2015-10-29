@@ -106,9 +106,9 @@ public class ClockFragmen extends Fragment {
 
         @Override
         public void run() {
-            textView.setText(new SimpleDateFormat("HH:mm:ss").format(timeLong) + "");
+            textView.setText(new SimpleDateFormat("h:mm:ss").format(timeLong) + "");
 
-            int hoursText  = Integer.parseInt(new SimpleDateFormat("HH").format(timeLong));
+            int hoursText  = Integer.parseInt(new SimpleDateFormat("hh").format(timeLong));
             circleHours.setValue(hoursText);
             circleMin.setValue(minutes);
             circleSec.setValue(seconds);
