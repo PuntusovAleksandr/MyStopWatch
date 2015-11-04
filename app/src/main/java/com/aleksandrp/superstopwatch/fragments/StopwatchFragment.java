@@ -67,6 +67,7 @@ public class StopwatchFragment extends Fragment implements Values {
         btPause.setOnLongClickListener(longListener);
         btStop.setOnLongClickListener(longListener);
     }
+
     class TimerTask extends AsyncTask {
         long timeFromStart = 0;
 
@@ -128,19 +129,19 @@ public class StopwatchFragment extends Fragment implements Values {
                     task = new TimerTask();
                     run = true;
                     task.execute();
-                    if (timeLong>0)
+                    if (timeLong > 0)
                         db.putNewTime(new TimeFix("Start new stopwatch", timeLong));
                     textViewBody.setText(tmp);
                     break;
                 case R.id.bt_stop:
-                    run = false;
                     if (task != null) {
+                        run = false;
                         task = null;
+                                db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
                     }
-                    db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
                     break;
                 case R.id.bt_pause:
-                    db.putNewTime(new TimeFix("Paused stopwatsh" ,timeLong));
+                            db.putNewTime(new TimeFix("Paused stopwatch", timeLong));
                     textViewBody.setText(textViewHead.getText().toString());
                     break;
             }
@@ -152,12 +153,12 @@ public class StopwatchFragment extends Fragment implements Values {
         public boolean onLongClick(View v) {
             switch (v.getId()) {
                 case R.id.bt_stop:
-                    db.putNewTime(new TimeFix("Stop stopwatch" + " and clear", timeLong));
+                            db.putNewTime(new TimeFix("Stop stopwatch" + " and clear", timeLong));
                     zering();
                     break;
                 case R.id.bt_pause:
                     textViewBody.setText(R.string.four_zero);
-                    db.putNewTime(new TimeFix("Paused stopwatch" + " and zering", timeLong));
+                            db.putNewTime(new TimeFix("Paused stopwatch" + " and zering", timeLong));
                     break;
             }
             return true;
@@ -171,11 +172,13 @@ public class StopwatchFragment extends Fragment implements Values {
     }
 
     private void zering() {
-        run = false;
-        if (task != null)
+        if (task != null) {
+            run = false;
             task = null;
+        }
         textViewBody.setText(R.string.four_zero);
         textViewHead.setText(R.string.four_zero);
+
     }
 
 }
