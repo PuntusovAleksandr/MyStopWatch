@@ -151,6 +151,6 @@
 
     <color name="BlackTrancp">#70000000</color>
     <color name="BlackDarkTrancp">#95000000</color>
-
+    <color name="DarkBlueTransparent">#fe6e70f4</color>
 
 </resources>
