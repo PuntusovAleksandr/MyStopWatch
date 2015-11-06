@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.values.Values;
@@ -28,8 +27,6 @@ public class TimerFragment extends Fragment implements Values {
     private Button btStopTimer;
     private View view;
 
-    private boolean run;
-
     private TimerTask task;
 
     private int countValue;
@@ -39,7 +36,10 @@ public class TimerFragment extends Fragment implements Values {
     private NumberPicker numberPickerSeconds;
 
     private int intProgress;
-    private int res = 0;
+    private int intMaxValue;
+    private int resultTasck = 0;
+
+    private boolean flagTask = false;
 
 
     public TimerFragment() {
@@ -52,23 +52,64 @@ public class TimerFragment extends Fragment implements Values {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_timer, container, false);
         initialValues();
+
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        stopAllProcess();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        taskTimerZero();
+    }
+
     private void initialValues() {
+        initXMLValues();
+        initNumberPicker();
+        btStopTimer.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                stopAllProcess();
+                return true;
+            }
+        });
+    }
+
+    private void stopAllProcess() {
+        countValue = 0;
+        resultTasck = 0;
+        donutProgress.setMax(0);
+        donutProgress.setProgress(0);
+        taskTimerZero();
+
+        numberPickerHours.setValue(0);
+        numberPickerMinuts.setValue(0);
+        numberPickerSeconds.setValue(0);
+
+        btStartTimer.setEnabled(false);
+    }
+
+    private void initXMLValues() {
         donutProgress = (DonutProgress) view.findViewById(R.id.donut_progress);
         btStartTimer = (Button) view.findViewById(R.id.bt_timer_start);
         btPauseTimer = (Button) view.findViewById(R.id.bt_timer_pause);
         btStopTimer = (Button) view.findViewById(R.id.bt_timer_stop);
 
-        numberPickerHours = (NumberPicker) view.findViewById(R.id.nP_hours);
-        numberPickerMinuts = (NumberPicker) view.findViewById(R.id.np_minutes);
-        numberPickerSeconds = (NumberPicker) view.findViewById(R.id.np_seconds);
-
         donutProgress.setOnClickListener(listener);
         btStartTimer.setOnClickListener(listener);
         btPauseTimer.setOnClickListener(listener);
         btStopTimer.setOnClickListener(listener);
+    }
+
+    private void initNumberPicker() {
+        numberPickerHours = (NumberPicker) view.findViewById(R.id.nP_hours);
+        numberPickerMinuts = (NumberPicker) view.findViewById(R.id.np_minutes);
+        numberPickerSeconds = (NumberPicker) view.findViewById(R.id.np_seconds);
 
         numberPickerHours.setMaxValue(23);
         numberPickerMinuts.setMaxValue(59);
@@ -76,17 +117,6 @@ public class TimerFragment extends Fragment implements Values {
         numberPickerHours.setMinValue(0);
         numberPickerMinuts.setMinValue(0);
         numberPickerSeconds.setMinValue(0);
-
-
-        btStopTimer.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                donutProgress.setMax(0);
-                donutProgress.setProgress(0);
-                zering();
-                return true;
-            }
-        });
     }
 
     View.OnClickListener listener = new View.OnClickListener() {
@@ -94,43 +124,40 @@ public class TimerFragment extends Fragment implements Values {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.bt_timer_start:
-                    setValue();
-                    if (intProgress == 0) {
-                        if (donutProgress.getMax() > 0) {
-                            zering();
-                            task = new TimerTask();
-                            run = true;
-                            task.execute();
-                            setInVisibleNumberPicker();
-                        } else
-                            Toast.makeText(getActivity(), "Enter value timer", Toast.LENGTH_SHORT).show();
-                    } else {
+                    if (flagTask) {
+                        stopAllProcess();
+                        donutProgress.setMax(intMaxValue);
                         donutProgress.setProgress(intProgress);
-                        zering();
-                        task = new TimerTask();
-                        run = true;
-                        task.execute();
+                        countValue = intProgress;
+                        flagTask = false;
+                        btPauseTimer.setEnabled(true);
+                    }else {
+                        setValue();
                     }
+                    task = new TimerTask();
+                    task.execute();
+                    setInVisibleNumberPicker();
+                    btStartTimer.setEnabled(false);
                     break;
                 case R.id.bt_timer_stop:
-                    run = false;
-                    countValue = 0;
-                    res = 0;
-                    zering();
+                    taskTimerZero();
                     setInVisibleNumberPicker();
+                    btStartTimer.setEnabled(true);
                     break;
-                case R.id.bt_pause:
+                case R.id.bt_timer_pause:
                     if (task != null && !task.isCancelled()) {
-                        countValue = 0;
-                        res = 0;
+                        flagTask = true;
+                        intMaxValue = donutProgress.getMax();
                         intProgress = donutProgress.getProgress();
-                        zering();
-                        donutProgress.setProgress(intProgress);
+                        taskTimerZero();
+                        setInVisibleNumberPicker();
+                        btStartTimer.setEnabled(true);
+                        btPauseTimer.setEnabled(false);
                     }
-                    setInVisibleNumberPicker();
                     break;
                 case R.id.donut_progress:
                     setVisibleNumberPicker();
+                    btStartTimer.setEnabled(true);
                     break;
             }
         }
@@ -149,11 +176,11 @@ public class TimerFragment extends Fragment implements Values {
     }
 
     private void setValue() {
-        int milInHour = numberPickerHours.getValue() * (int) MILLIS_IN_HOUR;
-        int milInMin = numberPickerMinuts.getValue() * (int) MILLIS_IN_MINUTE;
-        int milInSec = numberPickerSeconds.getValue() * (int) MILLIS_IN_SECOND;
-        countValue = (milInHour + milInMin + milInSec) / 10;
+        countValue = (numberPickerHours.getValue() * (int) MILLIS_IN_HOUR +
+                numberPickerMinuts.getValue() * (int) MILLIS_IN_MINUTE +
+                numberPickerSeconds.getValue() * (int) MILLIS_IN_SECOND) / 10;
         donutProgress.setMax(countValue);
+        resultTasck = 0;
     }
 
     private void taskTimerZero() {
@@ -164,35 +191,29 @@ public class TimerFragment extends Fragment implements Values {
         }
     }
 
-    private void zering() {
-        run = false;
-        taskTimerZero();
-    }
-
     class TimerTask extends AsyncTask {
-
         @Override
         protected Object doInBackground(Object[] params) {
 //             startTime = System.currentTimeMillis();
-            while (res < countValue) {
+            while (resultTasck < countValue) {
+                if (isCancelled()) return null;
                 try {
                     TimeUnit.MILLISECONDS.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 publishProgress();
-                res++;
+                resultTasck++;
             }
-            taskTimerZero();
             return null;
         }
 
         @Override
         protected void onProgressUpdate(Object[] values) {
             super.onProgressUpdate(values);
-            donutProgress.setProgress(countValue - res);
+            int result = countValue - resultTasck;
+            if (result == (-1)) result = 0;
+            donutProgress.setProgress(result);
         }
     }
-
-
 }
