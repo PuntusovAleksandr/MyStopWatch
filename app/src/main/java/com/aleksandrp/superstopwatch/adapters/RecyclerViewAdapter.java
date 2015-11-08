@@ -14,6 +14,7 @@ import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.db.entity.TimeFix;
 import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
 import com.aleksandrp.superstopwatch.dialog.CastomDialog;
+import com.aleksandrp.superstopwatch.dialog.CastomDialogLongClick;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -99,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     View.OnLongClickListener longListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View view) {
-            new CastomDialog(context, null,
+            new CastomDialogLongClick(context, null,
                     context.getResources().getString(
                             R.string.delete_all_items_from_list)).show();
             return true;

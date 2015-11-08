@@ -45,6 +45,14 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "dbHelper isxlosed");
     }
 
+    private void refresh() {
+//       RefreshList refreshList
+    }
+
+    public interface RefreshList {
+        void refreshListHistory();
+    }
+
     public void putNewTime(TimeFix timeFix) {
         openDb();
         Log.i(ValuesDB.TAG_DB, "putNewTime where timeFix = " + timeFix.toString());
@@ -57,8 +65,11 @@ public class DBImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        refresh();
 //        close();
     }
+
+
 
     public ArrayList<TimeFix> getAllTimeById() {
         Log.i(ValuesDB.TAG_DB, "getAllTimeById");
@@ -108,6 +119,7 @@ public class DBImpl {
         openDb();
         Log.i(ValuesDB.TAG_DB, "removeAllTime all ");
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME, null, null);
+        refresh();
 //        close();
     }
 
@@ -116,6 +128,7 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "removeByTime where time = " + time);
                 database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                         ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
+        refresh();
 //        close();
     }
 
@@ -124,6 +137,7 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "removeByDate where time = " + time);
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
                 ValuesDB.COLUMN_DATE + " = " + time, null);
+        refresh();
 //        close();
     }
 }

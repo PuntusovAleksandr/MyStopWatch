@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements DBImpl.RefreshList {
 
     private RecyclerView recyclerView;
 
@@ -29,12 +29,16 @@ public class HistoryFragment extends Fragment {
 
     private DBImpl db;
 
-    private RecyclerViewAdapter recyclerViewAdapter;
+    public static RecyclerViewAdapter recyclerViewAdapter;
 
     private final String ALL = "All";
     private final String NAME = "Name";
     private final String DATE = "Date";
     private final String TIME = "Time";
+
+    private TabLayout.Tab selectTab;
+
+    private View view;
 
     public HistoryFragment() {
     }
@@ -44,9 +48,9 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         db = new DBImpl(getActivity().getApplicationContext());
 
-        View view = inflater.inflate(R.layout.recycler_view, container, false);
+        view = inflater.inflate(R.layout.recycler_view, container, false);
 
-        initTab(view);
+        initTab();
         initializedRecyclerView(view);
         initialized();
         initializeAdapter();
@@ -54,7 +58,7 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-    private void initTab(View view) {
+    public void initTab() {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_history);
         tabLayout.addTab(tabLayout.newTab()
                 .setText(ALL));
@@ -89,6 +93,7 @@ public class HistoryFragment extends Fragment {
         });
     }
 
+
     private void initializedRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -103,6 +108,11 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initialized() {
-        times = db.getAllTimeByDate();
+        times = db.getAllTimeById();
+    }
+
+    @Override
+    public void refreshListHistory() {
+        initTab();
     }
 }
