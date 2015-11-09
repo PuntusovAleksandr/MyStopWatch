@@ -51,7 +51,7 @@ public class HistoryFragment extends Fragment implements DBImpl.RefreshList {
         view = inflater.inflate(R.layout.recycler_view, container, false);
 
         initTab();
-        initializedRecyclerView(view);
+        initializedRecyclerView();
         initialized();
         initializeAdapter();
 
@@ -94,7 +94,7 @@ public class HistoryFragment extends Fragment implements DBImpl.RefreshList {
     }
 
 
-    private void initializedRecyclerView(View view) {
+    private void initializedRecyclerView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -113,6 +113,7 @@ public class HistoryFragment extends Fragment implements DBImpl.RefreshList {
 
     @Override
     public void refreshListHistory() {
-        initTab();
+        initialized();
+        initializeAdapter();
     }
 }
