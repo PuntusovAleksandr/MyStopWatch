@@ -24,10 +24,17 @@ public class DBImpl {
     private ContentValues contentValues;
     private SQLiteDatabase database;
     private Cursor cursor;
+    private static RefreshList mUpdate;
 
     public DBImpl(Context context) {
         this.context = context;
         Log.i(ValuesDB.TAG_DB, "Open : " + getClass().getName().toString());
+    }
+
+    public DBImpl(Context context, RefreshList updateList) {
+        this.context = context;
+        Log.i(ValuesDB.TAG_DB, "Open : " + getClass().getName().toString());
+        mUpdate = updateList;
     }
 
     public void openDb() {
@@ -46,7 +53,9 @@ public class DBImpl {
     }
 
     private void refresh() {
-//       RefreshList refreshList
+        if (mUpdate != null) {
+            mUpdate.refreshListHistory();
+        }
     }
 
     public interface RefreshList {
@@ -68,7 +77,6 @@ public class DBImpl {
         refresh();
 //        close();
     }
-
 
 
     public ArrayList<TimeFix> getAllTimeById() {
@@ -97,7 +105,7 @@ public class DBImpl {
         openDb();
         try {
             cursor = database.query(ValuesDB.NAME_TABLE_TABLE_TIME,
-                    null, null, null, null, null, orderBy+" DESC");
+                    null, null, null, null, null, orderBy + " DESC");
             if (cursor.moveToFirst()) {
                 do {
                     long id = cursor.getLong(cursor.getColumnIndex(ValuesDB.COLUMN_ID));
@@ -126,8 +134,8 @@ public class DBImpl {
     public void removeByTime(long time) {
         openDb();
         Log.i(ValuesDB.TAG_DB, "removeByTime where time = " + time);
-                database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
-                        ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
+        database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
+                ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
         refresh();
 //        close();
     }
