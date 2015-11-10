@@ -130,18 +130,18 @@ public class StopwatchFragment extends Fragment implements Values {
                     run = true;
                     task.execute();
                     if (timeLong > 0)
-                        db.putNewTime(new TimeFix("Start new stopwatch", timeLong));
+                        db.putNewTime(new TimeFix(getActivity().getString(R.string.start_new), timeLong));
                     textViewBody.setText(tmp);
                     break;
                 case R.id.bt_stop:
                     if (task != null) {
                         run = false;
                         task = null;
-                                db.putNewTime(new TimeFix("Stop stopwatch", timeLong));
+                                db.putNewTime(new TimeFix(getActivity().getString(R.string.stop_stopwatch), timeLong));
                     }
                     break;
                 case R.id.bt_pause:
-                            db.putNewTime(new TimeFix("Paused stopwatch", timeLong));
+                            db.putNewTime(new TimeFix(getActivity().getString(R.string.pause_stopwatch), timeLong));
                     textViewBody.setText(textViewHead.getText().toString());
                     break;
             }
@@ -153,12 +153,12 @@ public class StopwatchFragment extends Fragment implements Values {
         public boolean onLongClick(View v) {
             switch (v.getId()) {
                 case R.id.bt_stop:
-                            db.putNewTime(new TimeFix("Stop stopwatch" + " and clear", timeLong));
+                            db.putNewTime(new TimeFix(getActivity().getString(R.string.stop_and_clear), timeLong));
                     zering();
                     break;
                 case R.id.bt_pause:
                     textViewBody.setText(R.string.four_zero);
-                            db.putNewTime(new TimeFix("Paused stopwatch" + " and zering", timeLong));
+                            db.putNewTime(new TimeFix(getActivity().getString(R.string.pause_and_clear), timeLong));
                     break;
             }
             return true;

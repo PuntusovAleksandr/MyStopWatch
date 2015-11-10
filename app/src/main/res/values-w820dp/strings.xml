@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="start_new">Start new stopwatch</string>
+    <string name="stop_stopwatch">Stop stopwatch</string>
+    <string name="pause_stopwatch">Paused stopwatch</string>
+    <string name="stop_and_clear">Stop stopwatch and clear</string>
+    <string name="pause_and_clear">Paused stopwatch and clear</string>
+</resources>

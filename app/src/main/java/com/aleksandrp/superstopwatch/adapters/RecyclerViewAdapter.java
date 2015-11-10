@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.db.entity.TimeFix;
-import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
 import com.aleksandrp.superstopwatch.dialog.CastomDialog;
 import com.aleksandrp.superstopwatch.dialog.CastomDialogLongClick;
 
@@ -67,13 +66,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tv_timeTitle.setText(times.get(position).getTitle());
         holder.tv_timeDate.setText(timeDate);
         holder.tv_timeLong.setText(timeLong);
-        holder.timeIcon.setImageResource(R.drawable.ic_launcher);
         holder.textId.setText(times.get(position).getId() + "");
+
+        setIcon(holder);
+//        holder.timeIcon.setImageResource(R.drawable.ic_launcher);
 
         holder.cardView.setOnClickListener(listener);
         holder.cardView.setOnLongClickListener(longListener);
         holder.cardView.setCardBackgroundColor(Color.parseColor("#88888888"));
 
+    }
+
+    private void setIcon(TimeViewHolder holder) {
+
+        String textFromTextView = holder.tv_timeTitle.getText().toString();
+        String textStartNew = context.getResources().getString(R.string.start_new);
+        if (textFromTextView.equals(textStartNew)) holder.timeIcon.setImageResource(R.drawable.start);
+        String textStop = context.getResources().getString(R.string.stop_stopwatch);
+        if (textFromTextView.equals(textStop)) holder.timeIcon.setImageResource(R.drawable.st_bg);
+        String textPause = context.getResources().getString(R.string.pause_stopwatch);
+        if (textFromTextView.equals(textPause)) holder.timeIcon.setImageResource(R.drawable.pausa);
+        String textStopClear = context.getResources().getString(R.string.stop_and_clear);
+        if (textFromTextView.equals(textStopClear)) holder.timeIcon.setImageResource(R.drawable.st_bg);
+        String textPausaClear = context.getResources().getString(R.string.pause_and_clear);
+        if (textFromTextView.equals(textPausaClear)) holder.timeIcon.setImageResource(R.drawable.pausa);
     }
 
     @Override

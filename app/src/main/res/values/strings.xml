@@ -27,4 +27,9 @@
     <string name="delete_item_from_list">Are you realy want to delete this item ?</string>
     <string name="delete_all_items_from_list">Are you realy want to delete all items ?</string>
     <string name="all_times_deleted">All times deleted!</string>
+    <string name="start_new">Start new stopwatch</string>
+    <string name="stop_stopwatch">Stop stopwatch</string>
+    <string name="pause_stopwatch">Paused stopwatch</string>
+    <string name="stop_and_clear">Stop stopwatch and clear</string>
+    <string name="pause_and_clear">Paused stopwatch and clear</string>
 </resources>
