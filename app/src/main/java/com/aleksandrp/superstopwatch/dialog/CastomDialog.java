@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.aleksandrp.mystopwatch.R;
 import com.aleksandrp.superstopwatch.db.functions_db.DBImpl;
@@ -26,7 +26,6 @@ public class CastomDialog extends AlertDialog.Builder {
         this.title = title;
         db = new DBImpl(context);
         init();
-
     }
 
 
@@ -36,12 +35,9 @@ public class CastomDialog extends AlertDialog.Builder {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (view == null) {
-//                            db.removeByDate();
-                            Toast.makeText(context, R.string.all_times_deleted, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, view.getBottom() + "", Toast.LENGTH_SHORT).show();
-
+                        if (view != null) {
+                            TextView textId = (TextView) view.findViewById(R.id.text_id);
+                            db.removeById(Long.parseLong(textId.getText().toString()));
                         }
                     }
                 });

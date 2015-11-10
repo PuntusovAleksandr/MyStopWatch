@@ -75,7 +75,6 @@ public class DBImpl {
             e.printStackTrace();
         }
         refresh();
-//        close();
     }
 
 
@@ -119,7 +118,6 @@ public class DBImpl {
         } catch (SQLiteException e) {
             Log.e(ValuesDB.TAG_DB, e.getStackTrace().toString());
         }
-//        close();
         return timeFixes;
     }
 
@@ -128,24 +126,15 @@ public class DBImpl {
         Log.i(ValuesDB.TAG_DB, "removeAllTime all ");
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME, null, null);
         refresh();
-//        close();
     }
 
-    public void removeByTime(long time) {
+
+    public void removeById(long l) {
         openDb();
-        Log.i(ValuesDB.TAG_DB, "removeByTime where time = " + time);
+        Log.i(ValuesDB.TAG_DB, "removeById where time = " + l);
         database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
-                ValuesDB.COLUMN_TIME_DATA + " = " + time, null);
+                ValuesDB.COLUMN_ID + " = " + l, null);
         refresh();
-//        close();
     }
 
-    public void removeByDate(long time) {
-        openDb();
-        Log.i(ValuesDB.TAG_DB, "removeByDate where time = " + time);
-        database.delete(ValuesDB.NAME_TABLE_TABLE_TIME,
-                ValuesDB.COLUMN_DATE + " = " + time, null);
-        refresh();
-//        close();
-    }
 }

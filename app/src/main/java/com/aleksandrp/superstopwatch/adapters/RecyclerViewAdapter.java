@@ -25,18 +25,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.TimeViewHolder> {
 
     private List<TimeFix> times;
-
-    private DBImpl db;
-
     private Context context;
-
-    private String textDialog;
 
 
     public RecyclerViewAdapter(List<TimeFix> times, Context context) {
         this.times = times;
         this.context = context;
-        db = new DBImpl(context);
     }
 
     public class TimeViewHolder extends RecyclerView.ViewHolder {
@@ -47,6 +41,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tv_timeLong;
         ImageView timeIcon;
 
+        TextView textId;
+
         TimeViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.cv);
@@ -54,6 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_timeDate = (TextView) itemView.findViewById(R.id.time_date);
             tv_timeLong = (TextView) itemView.findViewById(R.id.time_value);
             timeIcon = (ImageView) itemView.findViewById(R.id.time_photo);
+            textId = (TextView) itemView.findViewById(R.id.text_id);
         }
     }
 
@@ -71,6 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tv_timeDate.setText(timeDate);
         holder.tv_timeLong.setText(timeLong);
         holder.timeIcon.setImageResource(R.drawable.ic_launcher);
+        holder.textId.setText(times.get(position).getId() + "");
 
         holder.cardView.setOnClickListener(listener);
         holder.cardView.setOnLongClickListener(longListener);

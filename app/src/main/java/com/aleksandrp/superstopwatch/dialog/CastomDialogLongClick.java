@@ -36,10 +36,6 @@ public class CastomDialogLongClick extends AlertDialog.Builder {
                     public void onClick(DialogInterface dialog, int which) {
                         if (view == null) {
                             db.removeAllTime();
-
-                            Toast.makeText(context, R.string.all_times_deleted, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, view.getBottom() + "", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
