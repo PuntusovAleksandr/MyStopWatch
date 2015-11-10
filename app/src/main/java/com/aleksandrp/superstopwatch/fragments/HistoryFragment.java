@@ -40,16 +40,18 @@ public class HistoryFragment extends Fragment implements DBImpl.RefreshList {
 
     private View view;
 
+    private DBImpl.RefreshList mUpdate=this;
+
     public HistoryFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        db = new DBImpl(getActivity().getApplicationContext());
 
         view = inflater.inflate(R.layout.recycler_view, container, false);
 
+        db = new DBImpl(getActivity().getApplicationContext(), mUpdate);
         initTab();
         initializedRecyclerView();
         initialized();
